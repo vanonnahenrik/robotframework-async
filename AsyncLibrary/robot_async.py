@@ -50,3 +50,8 @@ class AsyncLibrary:
         t = threading.Thread(target=wrapped_f, args=(q,)+args, kwargs=kwargs)
         t.result_queue = q
         return t
+
+    def join_all_threads(self):
+        ''' Blocks until all threads created by async_run return '''
+        for handle in self._thread_pool:
+            self.async_get(handle)
